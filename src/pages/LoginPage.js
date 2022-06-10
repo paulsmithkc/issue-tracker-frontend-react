@@ -1,7 +1,11 @@
 import React from 'react';
 
-function HomePage() {
-  return <h1>Login Page</h1>;
+function LoginPage() {
+  return (
+    <main className="container p-3">
+      <h1 className="text-center">Login Page</h1>
+    </main>
+  );
 }
 
-export default HomePage;
+export default LoginPage;
