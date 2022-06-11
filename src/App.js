@@ -8,6 +8,7 @@ import Footer from './components/Footer';
 import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
 import ProjectListPage from './pages/ProjectListPage';
+import ProjectDetailPage from './pages/ProjectDetailPage';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/project" element={<Navigate to="/project/list" />} />
           <Route path="/project/list" element={<ProjectListPage />} />
+          <Route path="/project/:projectId" element={<ProjectDetailPage />} />
         </Routes>
       </div>
       <Footer />

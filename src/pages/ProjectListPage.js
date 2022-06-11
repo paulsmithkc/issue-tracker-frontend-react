@@ -27,7 +27,7 @@ function ProjectListPage() {
       </h1>
       <div>
         {pending && (
-          <div>
+          <div className="text-center">
             <span
               className="spinner-border spinner-border-sm me-2"
               role="status"
@@ -36,7 +36,7 @@ function ProjectListPage() {
             <span>{pending}</span>
           </div>
         )}
-        {error && <div className="text-danger">{error}</div>}
+        {error && <div className="text-center text-danger">{error}</div>}
         {projects && (
           <div id="ProjectListContent">
             {projects.map((project) => (
