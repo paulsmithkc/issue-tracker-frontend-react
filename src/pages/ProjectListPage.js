@@ -42,7 +42,9 @@ function ProjectListPage() {
             {projects.map((project) => (
               <div className="card mb-2">
                 <div className="card-body">
-                  <div className="card-title h4">{project.title}</div>
+                  <div className="card-title h4">
+                    <Link to={'/project/' + project.id}>{project.title}</Link>
+                  </div>
                   <div className="card-text">{project.description}</div>
                 </div>
               </div>
