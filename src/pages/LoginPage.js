@@ -1,25 +1,41 @@
-import React from 'react';
+import React, { useState } from 'react';
+import axios from 'axios';
 // import { InputRow, SubmitRow } from '@merlin4/react-form-row';
 import InputRow from '../components/InputRow';
 import SubmitRow from '../components/SubmitRow';
 
 function LoginPage() {
+  const [submitted, setSubmitted] = useState(false);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const emailError = !email ? 'Email required.' : null;
+  const passwordError = !password ? 'Password required.' : null;
+  const anyErrors = emailError || passwordError;
 
   function onSubmit() {
-    alert('submit');
+    setSubmitted(true);
+    
+    return axios.post('http://localhost:4000/api/auth/login', {
+      email: email,
+      password: password,
+    });
   }
 
   return (
     <main id="LoginPage" className="container p-3">
       <h1 className="text-center">Login Page</h1>
-      <form id="LoginForm">
+      <form id="LoginForm" onSubmit={(evt) => evt.preventDefault()}>
         <InputRow
           label="Email"
           id="LoginForm-EmailInput"
           name="email"
           type="email"
           autoComplete="email"
-          validated={false}
+          value={email}
+          onChange={(evt) => setEmail(evt.currentTarget.value)}
+          validated={submitted}
+          error={emailError}
         />
         <InputRow
           label="Password"
@@ -27,11 +43,12 @@ function LoginPage() {
           name="password"
           type="password"
           autoComplete="current-password"
-          validated={false}
+          value={password}
+          onChange={(evt) => setPassword(evt.currentTarget.value)}
+          validated={submitted}
+          error={passwordError}
         />
-        <SubmitRow onClick={onSubmit}>
-          Login
-        </SubmitRow>
+        <SubmitRow onSubmit={onSubmit}>Login</SubmitRow>
       </form>
     </main>
   );

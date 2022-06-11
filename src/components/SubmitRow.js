@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 function SubmitRow({
-  className = 'btn btn-primary',
+  className = 'btn btn-primary me-2',
   type = 'submit',
   disabled = false,
   onSubmit,
@@ -25,7 +25,9 @@ function SubmitRow({
           setState({ success: response?.data?.message || 'Success!' });
         })
         .catch((error) => {
-          const responseError = error?.response?.data?.error;
+          const responseError =
+            error?.response?.data?.error || error?.response?.data?.message;
+
           if (!responseError) {
             // no error message sent back by server
             setError(error.message || 'Error!');
@@ -52,7 +54,7 @@ function SubmitRow({
   }
 
   return (
-    <div className="mb-3 d-flex flex-row flex-wrap align-items-start justify-content-start">
+    <div className="mb-3 d-flex flex-row flex-wrap align-items-center justify-content-start">
       <button
         className={className}
         type={type}
@@ -62,7 +64,7 @@ function SubmitRow({
       >
         {pending && (
           <span
-            class="spinner-border spinner-border-sm"
+            className="spinner-border spinner-border-sm me-2"
             role="status"
             aria-hidden="true"
           ></span>
