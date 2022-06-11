@@ -9,7 +9,7 @@ function ProjectListPage() {
   useEffect(() => {
     setState({ pending: 'Fetching projects...' });
     axios
-      .get('http://localhost:4000/api/project/list')
+      .get(`${process.env.REACT_APP_API_URL}/api/project/list`)
       .then((res) => {
         console.log('Projects loaded.');
         setState({ projects: res.data });

@@ -16,7 +16,7 @@ function LoginPage() {
   function onSubmit() {
     setSubmitted(true);
 
-    return axios.post('http://localhost:4000/api/auth/login', {
+    return axios.post(`${process.env.REACT_APP_API_URL}/api/auth/login`, {
       email: email,
       password: password,
     });

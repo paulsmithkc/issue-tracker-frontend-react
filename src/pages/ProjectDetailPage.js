@@ -10,7 +10,7 @@ function ProjectDetailPage() {
   useEffect(() => {
     setState({ pending: 'Fetching project...' });
     axios
-      .get(`http://localhost:4000/api/project/${projectId}`)
+      .get(`${process.env.REACT_APP_API_URL}/api/project/${projectId}`)
       .then((res) => {
         console.log('Projects loaded.');
         setState({ project: res.data });
@@ -19,7 +19,7 @@ function ProjectDetailPage() {
         console.error(err.message);
         setState({ error: err.message });
       });
-  }, []);
+  }, [projectId]);
 
   return (
     <main id="ProjectDetailsPage" className="container p-3">
