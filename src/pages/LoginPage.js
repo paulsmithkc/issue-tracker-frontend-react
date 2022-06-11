@@ -11,11 +11,11 @@ function LoginPage() {
 
   const emailError = !email ? 'Email required.' : null;
   const passwordError = !password ? 'Password required.' : null;
-  const anyErrors = emailError || passwordError;
+  // const anyErrors = emailError || passwordError;
 
   function onSubmit() {
     setSubmitted(true);
-    
+
     return axios.post('http://localhost:4000/api/auth/login', {
       email: email,
       password: password,
@@ -24,7 +24,9 @@ function LoginPage() {
 
   return (
     <main id="LoginPage" className="container p-3">
-      <h1 className="text-center">Login Page</h1>
+      <h1 id="LoginHeader" className="text-center">
+        Login
+      </h1>
       <form id="LoginForm" onSubmit={(evt) => evt.preventDefault()}>
         <InputRow
           label="Email"

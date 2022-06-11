@@ -1,5 +1,5 @@
 import React from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -7,6 +7,7 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
+import ProjectListPage from './pages/ProjectListPage';
 
 function App() {
   return (
@@ -16,6 +17,8 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<LoginPage />} />
+          <Route path="/project" element={<Navigate to="/project/list" />} />
+          <Route path="/project/list" element={<ProjectListPage />} />
         </Routes>
       </div>
       <Footer />

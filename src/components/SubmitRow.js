@@ -4,6 +4,7 @@ function SubmitRow({
   className = 'btn btn-primary me-2',
   type = 'submit',
   disabled = false,
+  onClick,
   onSubmit,
   children,
   ...rest
@@ -18,9 +19,10 @@ function SubmitRow({
 
   function onSubmitWrapper(evt) {
     evt.preventDefault();
-    if (onSubmit) {
+    const handler = onClick || onSubmit;
+    if (handler) {
       setState({ pending: 'Loading...' });
-      Promise.resolve(onSubmit(evt))
+      Promise.resolve(handler(evt))
         .then((response) => {
           setState({ success: response?.data?.message || 'Success!' });
         })

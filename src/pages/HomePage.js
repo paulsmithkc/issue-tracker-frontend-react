@@ -3,8 +3,10 @@ import { Link } from 'react-router-dom';
 
 function HomePage() {
   return (
-    <main className="container p-3">
-      <h1 className="text-center">Home Page</h1>
+    <main id="HomePage" className="container p-3">
+      <h1 id="HomeHeader" className="text-center">
+        Home
+      </h1>
       <div
         className="d-flex align-items-center justify-content-center"
         style={{ minHeight: '400px' }}
