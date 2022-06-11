@@ -1,24 +1,34 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../AppContexts';
 
 function ProjectListPage() {
+  const auth = React.useContext(AuthContext);
   const [state, setState] = useState({});
   const { pending, error, projects } = state;
 
   useEffect(() => {
-    setState({ pending: 'Fetching projects...' });
-    axios
-      .get(`${process.env.REACT_APP_API_URL}/api/project/list`)
-      .then((res) => {
-        console.log('Projects loaded.');
-        setState({ projects: res.data });
-      })
-      .catch((err) => {
-        console.error(err.message);
-        setState({ error: err.message });
-      });
-  }, []);
+    if (!auth) {
+      setState({ error: 'You are not logged in!' });
+    } else {
+      setState({ pending: 'Fetching projects...' });
+      axios
+        .get(`${process.env.REACT_APP_API_URL}/api/project/list`, {
+          headers: {
+            Authorization: `Bearer ${auth.token}`,
+          },
+        })
+        .then((res) => {
+          console.log('Projects loaded.');
+          setState({ projects: res.data });
+        })
+        .catch((err) => {
+          console.error(err.message);
+          setState({ error: err.message });
+        });
+    }
+  }, [auth]);
 
   return (
     <main id="ProjectListPage" className="container p-3">
@@ -40,7 +50,7 @@ function ProjectListPage() {
         {projects && (
           <div id="ProjectListContent">
             {projects.map((project) => (
-              <div className="card mb-2">
+              <div className="card mb-2" key={project.id}>
                 <div className="card-body">
                   <div className="card-title h4">
                     <Link to={'/project/' + project.id}>{project.title}</Link>

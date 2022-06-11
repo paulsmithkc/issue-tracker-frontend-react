@@ -1,25 +1,35 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link, useParams } from 'react-router-dom';
+import { AuthContext } from '../AppContexts';
 
 function ProjectDetailPage() {
+  const auth = React.useContext(AuthContext);
   const { projectId } = useParams();
   const [state, setState] = useState({});
   const { pending, error, project } = state;
 
   useEffect(() => {
-    setState({ pending: 'Fetching project...' });
-    axios
-      .get(`${process.env.REACT_APP_API_URL}/api/project/${projectId}`)
-      .then((res) => {
-        console.log('Projects loaded.');
-        setState({ project: res.data });
-      })
-      .catch((err) => {
-        console.error(err.message);
-        setState({ error: err.message });
-      });
-  }, [projectId]);
+    if (!auth) {
+      setState({ error: 'You are not logged in!' });
+    } else {
+      setState({ pending: 'Fetching project...' });
+      axios
+        .get(`${process.env.REACT_APP_API_URL}/api/project/${projectId}`, {
+          headers: {
+            Authorization: `Bearer ${auth.token}`,
+          },
+        })
+        .then((res) => {
+          console.log('Projects loaded.');
+          setState({ project: res.data });
+        })
+        .catch((err) => {
+          console.error(err.message);
+          setState({ error: err.message });
+        });
+    }
+  }, [auth, projectId]);
 
   return (
     <main id="ProjectDetailsPage" className="container p-3">
