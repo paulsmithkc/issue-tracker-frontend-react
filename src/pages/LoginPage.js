@@ -4,7 +4,7 @@ import axios from 'axios';
 import InputRow from '../components/InputRow';
 import SubmitRow from '../components/SubmitRow';
 
-function LoginPage() {
+function LoginPage({ onLogin }) {
   const [submitted, setSubmitted] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -16,10 +16,16 @@ function LoginPage() {
   function onSubmit() {
     setSubmitted(true);
 
-    return axios.post(`${process.env.REACT_APP_API_URL}/api/auth/login`, {
+    const promise = axios.post(`${process.env.REACT_APP_API_URL}/api/auth/login`, {
       email: email,
       password: password,
     });
+
+    promise.then((res) => {
+      onLogin(res.data);
+    });
+
+    return promise;
   }
 
   return (
