@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 import { AuthContext } from '../AppContexts';
 
 function Header({ onLogout }) {
-  const auth = React.useContext(AuthContext);
+  const auth = useContext(AuthContext);
 
   return (
     <header id="Header">

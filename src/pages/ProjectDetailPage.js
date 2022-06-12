@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import axios from 'axios';
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { AuthContext } from '../AppContexts';
 
 function ProjectDetailPage() {
-  const auth = React.useContext(AuthContext);
+  const auth = useContext(AuthContext);
   const { projectId } = useParams();
   const [state, setState] = useState({});
   const { pending, error, project } = state;
