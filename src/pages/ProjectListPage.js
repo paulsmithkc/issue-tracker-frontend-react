@@ -20,7 +20,7 @@ function ProjectListPage() {
           },
         })
         .then((res) => {
-          console.log('Projects loaded.');
+          console.log('Project list loaded.');
           setState({ projects: res.data });
         })
         .catch((err) => {

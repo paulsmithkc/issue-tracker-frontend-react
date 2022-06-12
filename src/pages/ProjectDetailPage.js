@@ -21,7 +21,7 @@ function ProjectDetailPage() {
           },
         })
         .then((res) => {
-          console.log('Projects loaded.');
+          console.log(`Project ${projectId} loaded.`);
           setState({ project: res.data });
         })
         .catch((err) => {
