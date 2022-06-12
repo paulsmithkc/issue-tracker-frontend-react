@@ -1,6 +1,8 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "lang": "en",
+  "short_name": "Issues",
+  "name": "Issue Tracker",
+  "description": "Issue tracker portfolio project built with Azure Cosmos DB, Node.js, Express, and React.",
   "icons": [
     {
       "src": "favicon.ico",
@@ -20,6 +22,7 @@
   ],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "theme_color": "#e83283",
+  "background_color": "#212529",
+  "orientation": "any"
 }
