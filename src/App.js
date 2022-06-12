@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { Routes, Route, Navigate, useNavigate } from 'react-router-dom';
 import _ from 'lodash';
 import 'bootstrap';
-import 'bootstrap/dist/css/bootstrap.min.css';
+//import 'bootstrap/dist/css/bootstrap.min.css';
+import "bootswatch/dist/quartz/bootstrap.min.css";
 
 import { AuthContext } from './AppContexts';
 import Header from './components/Header';
