@@ -16,10 +16,13 @@ function LoginPage({ onLogin }) {
   function onSubmit() {
     setSubmitted(true);
 
-    const promise = axios.post(`${process.env.REACT_APP_API_URL}/api/auth/login`, {
-      email: email,
-      password: password,
-    });
+    const promise = axios.post(
+      `${process.env.REACT_APP_API_URL}/api/auth/login`,
+      {
+        email: email,
+        password: password,
+      }
+    );
 
     promise.then((res) => {
       onLogin(res.data);
@@ -30,34 +33,38 @@ function LoginPage({ onLogin }) {
 
   return (
     <main id="LoginPage" className="container p-3">
-      <h1 id="LoginHeader" className="text-center">
-        Login
-      </h1>
-      <form id="LoginForm" onSubmit={(evt) => evt.preventDefault()}>
-        <InputRow
-          label="Email"
-          id="LoginForm-EmailInput"
-          name="email"
-          type="email"
-          autoComplete="email"
-          value={email}
-          onChange={(evt) => setEmail(evt.currentTarget.value)}
-          validated={submitted}
-          error={emailError}
-        />
-        <InputRow
-          label="Password"
-          id="LoginForm-PasswordInput"
-          name="password"
-          type="password"
-          autoComplete="current-password"
-          value={password}
-          onChange={(evt) => setPassword(evt.currentTarget.value)}
-          validated={submitted}
-          error={passwordError}
-        />
-        <SubmitRow onSubmit={onSubmit}>Login</SubmitRow>
-      </form>
+      <div className="card">
+        <div className="card-body">
+          <h1 id="LoginHeader" className="text-center">
+            Login
+          </h1>
+          <form id="LoginForm" onSubmit={(evt) => evt.preventDefault()}>
+            <InputRow
+              label="Email"
+              id="LoginForm-EmailInput"
+              name="email"
+              type="email"
+              autoComplete="email"
+              value={email}
+              onChange={(evt) => setEmail(evt.currentTarget.value)}
+              validated={submitted}
+              error={emailError}
+            />
+            <InputRow
+              label="Password"
+              id="LoginForm-PasswordInput"
+              name="password"
+              type="password"
+              autoComplete="current-password"
+              value={password}
+              onChange={(evt) => setPassword(evt.currentTarget.value)}
+              validated={submitted}
+              error={passwordError}
+            />
+            <SubmitRow onSubmit={onSubmit}>Login</SubmitRow>
+          </form>
+        </div>
+      </div>
     </main>
   );
 }
