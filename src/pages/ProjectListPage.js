@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { Unauthenticated } from '../components/Unauthenticated';
 import { AuthContext } from '../AppContexts';
 import { getProjectList } from '../AppAPI';
 
@@ -10,7 +11,7 @@ function ProjectListPage() {
 
   useEffect(() => {
     if (!auth) {
-      setState({ error: 'You are not logged in!' });
+      setState({});
     } else {
       setState({ pending: 'Fetching projects...' });
       getProjectList(auth)
@@ -31,11 +32,14 @@ function ProjectListPage() {
       <h1 id="ProjectListHeader" className="text-center">
         Project List
       </h1>
-      <div className="text-center mb-2">
-        <Link className="btn btn-primary" to="/project/new">
-          Create Project
-        </Link>
-      </div>
+      {!auth && <Unauthenticated />}
+      {auth && (
+        <div className="text-center mb-2">
+          <Link className="btn btn-primary" to="/project/new">
+            Create Project
+          </Link>
+        </div>
+      )}
       <div>
         {pending && (
           <div className="text-center">

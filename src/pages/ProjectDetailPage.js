@@ -2,6 +2,7 @@ import React, { useEffect, useState, useContext } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { AuthContext } from '../AppContexts';
 import { Breadcrumbs } from '../components/Breadcrumbs';
+import { Unauthenticated } from '../components/Unauthenticated';
 import { getProjectById, getProjectIssues } from '../AppAPI';
 
 function ProjectDetailPage() {
@@ -12,7 +13,7 @@ function ProjectDetailPage() {
 
   useEffect(() => {
     if (!auth) {
-      setProjectState({ error: 'You are not logged in!' });
+      setProjectState({});
       setIssueState({});
     } else {
       setProjectState({ pending: 'Fetching project...' });
@@ -51,29 +52,34 @@ function ProjectDetailPage() {
           current={projectState?.data?.title || projectId}
         />
       </div>
-      <div className="card mb-3">
-        <div className="card-body">
-          {projectState.pending && (
-            <div className="text-center">
-              <span
-                className="spinner-border spinner-border-sm me-2"
-                role="status"
-                aria-hidden="false"
-              ></span>
-              <span>{projectState.pending}</span>
-            </div>
-          )}
-          {projectState.error && (
-            <div className="text-center text-danger">{projectState.error}</div>
-          )}
-          {projectState.data && (
-            <div id="ProjectDetailsContent">
-              <h2>{projectState.data.title}</h2>
-              <div>{projectState.data.description}</div>
-            </div>
-          )}
+      {!auth && <Unauthenticated />}
+      {auth && (
+        <div className="card mb-3">
+          <div className="card-body">
+            {projectState.pending && (
+              <div className="text-center">
+                <span
+                  className="spinner-border spinner-border-sm me-2"
+                  role="status"
+                  aria-hidden="false"
+                ></span>
+                <span>{projectState.pending}</span>
+              </div>
+            )}
+            {projectState.error && (
+              <div className="text-center text-danger">
+                {projectState.error}
+              </div>
+            )}
+            {projectState.data && (
+              <div id="ProjectDetailsContent">
+                <h2>{projectState.data.title}</h2>
+                <div>{projectState.data.description}</div>
+              </div>
+            )}
+          </div>
         </div>
-      </div>
+      )}
       <div>
         {issueState.pending && (
           <div className="text-center">

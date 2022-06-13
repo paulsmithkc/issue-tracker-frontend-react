@@ -1,6 +1,7 @@
 import React, { useState, useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { Breadcrumbs } from '../components/Breadcrumbs';
+import { Unauthenticated } from '../components/Unauthenticated';
 import InputRow from '../components/InputRow';
 import SubmitRow from '../components/SubmitRow';
 import { AuthContext } from '../AppContexts';
@@ -16,7 +17,7 @@ function ProjectCreatePage() {
 
   const titleError = !title ? 'Title required.' : '';
   const descriptionError = !description ? 'Description required.' : '';
-  const priorityError = '';  // priority is optional
+  const priorityError = ''; // priority is optional
   const anyErrors = titleError || descriptionError || priorityError;
 
   function onSubmit() {
@@ -42,13 +43,15 @@ function ProjectCreatePage() {
           current="Create Project"
         />
       </div>
-      <div className="card mb-3">
-        <div className="card-body">
-          <form
-            id="ProjectCreateForm"
-            onSubmit={(evt) => evt.preventDefault()}
-          >
-            <InputRow
+      {!auth && <Unauthenticated />}
+      {auth && (
+        <div className="card mb-3">
+          <div className="card-body">
+            <form
+              id="ProjectCreateForm"
+              onSubmit={(evt) => evt.preventDefault()}
+            >
+              <InputRow
                 label="Title"
                 id="ProjectCreateForm-TitleInput"
                 name="title"
@@ -80,9 +83,10 @@ function ProjectCreatePage() {
                 error={priorityError}
               />
               <SubmitRow onSubmit={onSubmit}>Create</SubmitRow>
-          </form>
+            </form>
+          </div>
         </div>
-      </div>
+      )}
     </main>
   );
 }
