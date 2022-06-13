@@ -13,6 +13,7 @@ import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import ProjectListPage from './pages/ProjectListPage';
 import ProjectDetailPage from './pages/ProjectDetailPage';
+import IssueDetailPage from './pages/IssueDetailPage';
 
 function App() {
   const [auth, setAuth] = useState(null);
@@ -41,6 +42,7 @@ function App() {
             <Route path="/project" element={<Navigate to="/project/list" />} />
             <Route path="/project/list" element={<ProjectListPage />} />
             <Route path="/project/:projectId" element={<ProjectDetailPage />} />
+            <Route path="/project/:projectId/issue/:issueId" element={<IssueDetailPage />} />
           </Routes>
         </div>
         <Footer />

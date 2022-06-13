@@ -8,7 +8,6 @@ function ProjectDetailPage() {
   const { projectId } = useParams();
   const [projectState, setProjectState] = useState({});
   const [issueState, setIssueState] = useState({});
-  // const { pending, error, project } = projectState;
 
   useEffect(() => {
     if (!auth) {
@@ -28,8 +27,9 @@ function ProjectDetailPage() {
           setProjectState({ data: res.data });
         })
         .catch((err) => {
-          console.error(err.message);
-          setProjectState({ error: err.message });
+          const errorMessage = err?.response?.data?.message || err.message;
+          console.error(errorMessage);
+          setProjectState({ error: errorMessage });
         });
       axios
         .get(
@@ -41,12 +41,13 @@ function ProjectDetailPage() {
           }
         )
         .then((res) => {
-          console.log(`Issues for project ${projectId} loaded.`);
+          console.log(`Issues loaded for project ${projectId}.`);
           setIssueState({ data: res.data });
         })
         .catch((err) => {
-          console.error(err.message);
-          setIssueState({ error: err.message });
+          const errorMessage = err?.response?.data?.message || err.message;
+          console.error(errorMessage);
+          setIssueState({ error: errorMessage });
         });
     }
   }, [auth, projectId]);

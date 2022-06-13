@@ -6,7 +6,7 @@ import { AuthContext } from '../AppContexts';
 function ProjectListPage() {
   const auth = useContext(AuthContext);
   const [state, setState] = useState({});
-  const { pending, error, projects } = state;
+  const { pending, error, data } = state;
 
   useEffect(() => {
     if (!auth) {
@@ -21,11 +21,12 @@ function ProjectListPage() {
         })
         .then((res) => {
           console.log('Project list loaded.');
-          setState({ projects: res.data });
+          setState({ data: res.data });
         })
         .catch((err) => {
-          console.error(err.message);
-          setState({ error: err.message });
+          const errorMessage = err?.response?.data?.message || err.message;
+          console.error(errorMessage);
+          setState({ error: errorMessage });
         });
     }
   }, [auth]);
@@ -47,9 +48,9 @@ function ProjectListPage() {
           </div>
         )}
         {error && <div className="text-center text-danger">{error}</div>}
-        {projects && (
+        {data && (
           <div id="ProjectListContent">
-            {projects.map((project) => (
+            {data.map((project) => (
               <div className="card mb-2" key={project.id}>
                 <div className="card-body">
                   <div className="card-title h4">
