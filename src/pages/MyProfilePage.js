@@ -7,7 +7,6 @@ import { getMyProfile, updateMyProfile } from '../AppAPI';
 function MyProfilePage() {
   const auth = useContext(AuthContext);
   const [profileState, setProfileState] = useState({});
-  const [submitted, setSubmitted] = useState(false);
   const [givenName, setGivenName] = useState('');
   const [familyName, setFamilyName] = useState('');
   const [email, setEmail] = useState('');
@@ -45,8 +44,6 @@ function MyProfilePage() {
   }, [auth]);
 
   function onSubmit() {
-    setSubmitted(true);
-
     if (anyErrors) {
       return Promise.reject({ message: 'Please fix errors above.' });
     } else {
