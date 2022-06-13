@@ -10,6 +10,7 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
+import RegisterPage from './pages/RegisterPage';
 import ProjectListPage from './pages/ProjectListPage';
 import ProjectDetailPage from './pages/ProjectDetailPage';
 
@@ -36,6 +37,7 @@ function App() {
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/login" element={<LoginPage onLogin={onLogin} />} />
+            <Route path="/register" element={<RegisterPage onLogin={onLogin} />} />
             <Route path="/project" element={<Navigate to="/project/list" />} />
             <Route path="/project/list" element={<ProjectListPage />} />
             <Route path="/project/:projectId" element={<ProjectDetailPage />} />

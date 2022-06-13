@@ -47,6 +47,13 @@ function Header({ onLogout }) {
               </NavLink>
             </li>
           )}
+          {!auth && (
+            <li className="nav-item">
+              <NavLink className="nav-link" to="/register">
+                Register
+              </NavLink>
+            </li>
+          )}
         </ul>
       </nav>
     </header>
