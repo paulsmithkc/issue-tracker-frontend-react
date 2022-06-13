@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 // import { InputRow, SubmitRow } from '@merlin4/react-form-row';
 import InputRow from '../components/InputRow';
 import SubmitRow from '../components/SubmitRow';
+import { login } from '../AppAPI';
 
 function LoginPage({ onLogin }) {
   const [submitted, setSubmitted] = useState(false);
@@ -15,20 +15,7 @@ function LoginPage({ onLogin }) {
 
   function onSubmit() {
     setSubmitted(true);
-
-    const promise = axios.post(
-      `${process.env.REACT_APP_API_URL}/api/auth/login`,
-      {
-        email: email,
-        password: password,
-      }
-    );
-
-    promise.then((res) => {
-      onLogin(res.data);
-    });
-
-    return promise;
+    return login({ email, password }).then((res) => onLogin(res.data));
   }
 
   return (

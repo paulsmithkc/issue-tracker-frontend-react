@@ -1,8 +1,8 @@
 import React, { useEffect, useState, useContext } from 'react';
-import axios from 'axios';
 import { useParams, Link } from 'react-router-dom';
 import { AuthContext } from '../AppContexts';
 import { Breadcrumbs } from '../components/Breadcrumbs';
+import { getIssueById, getIssueComments } from '../AppAPI';
 
 function IssueDetailPage() {
   const auth = useContext(AuthContext);
@@ -17,12 +17,7 @@ function IssueDetailPage() {
     } else {
       setIssueState({ pending: 'Fetching issue...' });
       setCommentState({ pending: 'Fetching comments...' });
-      axios
-        .get(`${process.env.REACT_APP_API_URL}/api/project/${projectId}/issue/${issueId}`, {
-          headers: {
-            Authorization: `Bearer ${auth.token}`,
-          },
-        })
+      getIssueById(auth, projectId, issueId)
         .then((res) => {
           console.log(`Issue ${issueId} loaded.`);
           setIssueState({ data: res.data });
@@ -32,15 +27,7 @@ function IssueDetailPage() {
           console.error(errorMessage);
           setIssueState({ error: errorMessage });
         });
-      axios
-        .get(
-          `${process.env.REACT_APP_API_URL}/api/project/${projectId}/issue/${issueId}/comment/list`,
-          {
-            headers: {
-              Authorization: `Bearer ${auth.token}`,
-            },
-          }
-        )
+      getIssueComments(auth, projectId, issueId)
         .then((res) => {
           console.log(`Comments loaded for issue ${issueId}.`);
           setCommentState({ data: res.data });

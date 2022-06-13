@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 // import { InputRow, SubmitRow } from '@merlin4/react-form-row';
 import InputRow from '../components/InputRow';
 import SubmitRow from '../components/SubmitRow';
+import { register } from '../AppAPI';
 
 function RegisterPage({ onLogin }) {
   const [submitted, setSubmitted] = useState(false);
@@ -41,18 +41,11 @@ function RegisterPage({ onLogin }) {
 
     if (anyErrors) {
       return Promise.reject({ message: 'Please fix errors above.' });
+    } else {
+      return register({ givenName, familyName, email, password }).then((res) =>
+        onLogin(res.data)
+      );
     }
-
-    const promise = axios.post(
-      `${process.env.REACT_APP_API_URL}/api/auth/register`,
-      { givenName, familyName, email, password }
-    );
-
-    promise.then((res) => {
-      onLogin(res.data);
-    });
-
-    return promise;
   }
 
   return (
@@ -129,7 +122,7 @@ function RegisterPage({ onLogin }) {
               validated={submitted || password}
               error={passwordConfirmError}
             />
-            <SubmitRow onSubmit={onSubmit}>Login</SubmitRow>
+            <SubmitRow onSubmit={onSubmit}>Register</SubmitRow>
           </form>
         </div>
       </div>

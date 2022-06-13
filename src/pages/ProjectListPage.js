@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react';
-import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../AppContexts';
+import { getProjectList } from '../AppAPI';
 
 function ProjectListPage() {
   const auth = useContext(AuthContext);
@@ -13,12 +13,7 @@ function ProjectListPage() {
       setState({ error: 'You are not logged in!' });
     } else {
       setState({ pending: 'Fetching projects...' });
-      axios
-        .get(`${process.env.REACT_APP_API_URL}/api/project/list`, {
-          headers: {
-            Authorization: `Bearer ${auth.token}`,
-          },
-        })
+      getProjectList(auth)
         .then((res) => {
           console.log('Project list loaded.');
           setState({ data: res.data });

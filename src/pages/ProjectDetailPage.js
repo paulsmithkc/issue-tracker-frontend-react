@@ -1,8 +1,8 @@
 import React, { useEffect, useState, useContext } from 'react';
-import axios from 'axios';
 import { useParams, Link } from 'react-router-dom';
 import { AuthContext } from '../AppContexts';
 import { Breadcrumbs } from '../components/Breadcrumbs';
+import { getProjectById, getProjectIssues } from '../AppAPI';
 
 function ProjectDetailPage() {
   const auth = useContext(AuthContext);
@@ -17,12 +17,7 @@ function ProjectDetailPage() {
     } else {
       setProjectState({ pending: 'Fetching project...' });
       setIssueState({ pending: 'Fetching issues...' });
-      axios
-        .get(`${process.env.REACT_APP_API_URL}/api/project/${projectId}`, {
-          headers: {
-            Authorization: `Bearer ${auth.token}`,
-          },
-        })
+      getProjectById(auth, projectId)
         .then((res) => {
           console.log(`Project ${projectId} loaded.`);
           setProjectState({ data: res.data });
@@ -32,15 +27,7 @@ function ProjectDetailPage() {
           console.error(errorMessage);
           setProjectState({ error: errorMessage });
         });
-      axios
-        .get(
-          `${process.env.REACT_APP_API_URL}/api/project/${projectId}/issue/list`,
-          {
-            headers: {
-              Authorization: `Bearer ${auth.token}`,
-            },
-          }
-        )
+      getProjectIssues(auth, projectId)
         .then((res) => {
           console.log(`Issues loaded for project ${projectId}.`);
           setIssueState({ data: res.data });
