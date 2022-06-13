@@ -14,6 +14,7 @@ import RegisterPage from './pages/RegisterPage';
 import MyProfilePage from './pages/MyProfilePage';
 import ProjectListPage from './pages/ProjectListPage';
 import ProjectDetailPage from './pages/ProjectDetailPage';
+import ProjectCreatePage from './pages/ProjectCreatePage';
 import IssueDetailPage from './pages/IssueDetailPage';
 
 function App() {
@@ -43,6 +44,7 @@ function App() {
             <Route path="/user/me" element={<MyProfilePage />} />
             <Route path="/project" element={<Navigate to="/project/list" />} />
             <Route path="/project/list" element={<ProjectListPage />} />
+            <Route path="/project/new" element={<ProjectCreatePage />} />
             <Route path="/project/:projectId" element={<ProjectDetailPage />} />
             <Route path="/project/:projectId/issue/:issueId" element={<IssueDetailPage />} />
           </Routes>

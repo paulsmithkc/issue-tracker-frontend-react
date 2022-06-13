@@ -42,6 +42,14 @@ export function getProjectById(auth, projectId) {
   });
 }
 
+export function createProject(auth, data) {
+  return axios.put(`${apiUrl}/api/project/new`, data, {
+    headers: {
+      Authorization: `Bearer ${auth.token}`,
+    },
+  });
+}
+
 export function getProjectIssues(auth, projectId) {
   return axios.get(`${apiUrl}/api/project/${projectId}/issue/list`, {
     headers: {
@@ -59,6 +67,14 @@ export function getIssueById(auth, projectId, issueId) {
       },
     }
   );
+}
+
+export function createIssue(auth, projectId, data) {
+  return axios.put(`${apiUrl}/api/project/${projectId}/issue/new`, data, {
+    headers: {
+      Authorization: `Bearer ${auth.token}`,
+    },
+  });
 }
 
 export function getIssueComments(auth, projectId, issueId) {

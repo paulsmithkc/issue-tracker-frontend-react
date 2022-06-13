@@ -31,6 +31,11 @@ function ProjectListPage() {
       <h1 id="ProjectListHeader" className="text-center">
         Project List
       </h1>
+      <div className="text-center mb-2">
+        <Link className="btn btn-primary" to="/project/new">
+          Create Project
+        </Link>
+      </div>
       <div>
         {pending && (
           <div className="text-center">
