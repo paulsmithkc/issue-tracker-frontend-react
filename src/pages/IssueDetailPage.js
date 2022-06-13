@@ -2,6 +2,7 @@ import React, { useEffect, useState, useContext } from 'react';
 import axios from 'axios';
 import { useParams, Link } from 'react-router-dom';
 import { AuthContext } from '../AppContexts';
+import { Breadcrumbs } from '../components/Breadcrumbs';
 
 function IssueDetailPage() {
   const auth = useContext(AuthContext);
@@ -57,6 +58,15 @@ function IssueDetailPage() {
       <h1 id="IssueDetailsHeader" className="text-center">
       Issue Details
       </h1>
+      <div>
+        <Breadcrumbs
+          stack={[
+            { title: 'Projects', url: '/project/list' },
+            { title: 'Project', url: `/project/${projectId}` },
+          ]}
+          current={issueState?.data?.title || issueId}
+        />
+      </div>
       <div className="card mb-3">
         <div className="card-body">
           {issueState.pending && (
