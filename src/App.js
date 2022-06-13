@@ -6,6 +6,7 @@ import 'bootstrap';
 import 'bootswatch/dist/quartz/bootstrap.min.css';
 
 import { AuthContext } from './AppContexts';
+import { useAuthStore } from './hooks/useAuthStore';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import HomePage from './pages/HomePage';
@@ -18,43 +19,16 @@ import ProjectCreatePage from './pages/ProjectCreatePage';
 import IssueDetailPage from './pages/IssueDetailPage';
 
 function App() {
-  const [auth, setAuth] = useState(null);
+  const [auth, setAuth] = useAuthStore(null);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (localStorage) {
-      const authValue = localStorage.getItem('auth');
-      if (authValue) {
-        const authParsed = JSON.parse(authValue);
-        setAuth(authParsed);
-      }
-    }
-  }, []);
-
   function onLogin(response) {
-    const newAuth = _.pick(
-      response,
-      'userId',
-      'email',
-      'token',
-      'tokenExpiresIn'
-    );
-
-    if (localStorage) {
-      localStorage.setItem('auth', JSON.stringify(newAuth));
-    }
-
-    setAuth(newAuth);
+    setAuth(_.pick(response, 'userId', 'email', 'token', 'tokenExpiresIn'));
     navigate('/project/list');
   }
 
   function onLogout(evt) {
     evt.preventDefault();
-
-    if (localStorage) {
-      localStorage.setItem('auth', null);
-    }
-
     setAuth(null);
     navigate('/login');
   }
