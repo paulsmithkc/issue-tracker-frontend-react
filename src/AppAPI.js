@@ -10,6 +10,22 @@ export function register(data) {
   return axios.post(`${apiUrl}/api/auth/register`, data);
 }
 
+export function getMyProfile(auth) {
+  return axios.get(`${apiUrl}/api/auth/me`, {
+    headers: {
+      Authorization: `Bearer ${auth.token}`,
+    },
+  });
+}
+
+export function updateMyProfile(auth, data) {
+  return axios.put(`${apiUrl}/api/auth/me`, data, {
+    headers: {
+      Authorization: `Bearer ${auth.token}`,
+    },
+  });
+}
+
 export function getProjectList(auth) {
   return axios.get(`${apiUrl}/api/project/list`, {
     headers: {

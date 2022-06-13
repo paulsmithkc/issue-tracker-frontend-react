@@ -34,11 +34,17 @@ function RegisterPage({ onLogin }) {
       ? 'Passwords do not match'
       : '';
 
-  const anyErrors = emailError || passwordError;
+  const anyErrors =
+    givenNameError ||
+    familyNameError ||
+    emailError ||
+    emailConfirmError ||
+    passwordError ||
+    passwordConfirmError;
 
   function onSubmit() {
     setSubmitted(true);
-
+    
     if (anyErrors) {
       return Promise.reject({ message: 'Please fix errors above.' });
     } else {

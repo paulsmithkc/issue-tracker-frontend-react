@@ -11,6 +11,7 @@ import Footer from './components/Footer';
 import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
+import MyProfilePage from './pages/MyProfilePage';
 import ProjectListPage from './pages/ProjectListPage';
 import ProjectDetailPage from './pages/ProjectDetailPage';
 import IssueDetailPage from './pages/IssueDetailPage';
@@ -39,6 +40,7 @@ function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="/login" element={<LoginPage onLogin={onLogin} />} />
             <Route path="/register" element={<RegisterPage onLogin={onLogin} />} />
+            <Route path="/user/me" element={<MyProfilePage />} />
             <Route path="/project" element={<Navigate to="/project/list" />} />
             <Route path="/project/list" element={<ProjectListPage />} />
             <Route path="/project/:projectId" element={<ProjectDetailPage />} />
