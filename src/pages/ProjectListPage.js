@@ -53,7 +53,7 @@ function ProjectListPage() {
               <div className="card mb-2" key={project.id}>
                 <div className="card-body">
                   <div className="card-title h4">
-                    <Link to={'/project/' + project.id}>{project.title}</Link>
+                    <Link to={`/project/${project.id}`}>{project.title}</Link>
                   </div>
                   <div className="card-text">{project.description}</div>
                 </div>
