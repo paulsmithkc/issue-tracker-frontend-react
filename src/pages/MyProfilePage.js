@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
+import moment from 'moment';
 import InputRow from '../components/InputRow';
 import SubmitRow from '../components/SubmitRow';
 import { Unauthenticated } from '../components/Unauthenticated';
@@ -88,6 +89,14 @@ function MyProfilePage() {
                   {givenName} {familyName}
                 </h2>
                 <div className="row">
+                  <div className="col-lg-6 text-center mb-1 fst-italic text-muted">
+                    Registered:{' '}
+                    {moment(profileState.data.registeredOn).format('LL')}
+                  </div>
+                  <div className="col-lg-6 text-center mb-1 fst-italic text-muted">
+                    Last Login:{' '}
+                    {moment(profileState.data.lastLoginOn).fromNow()}
+                  </div>
                   <div className="col-lg-6">
                     <InputRow
                       label="Given Name"
