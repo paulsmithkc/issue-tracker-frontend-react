@@ -104,6 +104,16 @@ function ProjectDetailPage() {
           </div>
         </div>
       )}
+      {auth && (
+        <div className="text-center mb-2">
+          <Link
+            className="btn btn-primary"
+            to={`/project/${projectId}/issue/new`}
+          >
+            Create Issue
+          </Link>
+        </div>
+      )}
       <div>
         {issueState.pending && (
           <div className="text-center">

@@ -1,14 +1,15 @@
 import React, { useState, useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { Breadcrumbs } from '../components/Breadcrumbs';
 import { Unauthenticated } from '../components/Unauthenticated';
 import InputRow from '../components/InputRow';
 import SubmitRow from '../components/SubmitRow';
 import { AuthContext } from '../AppContexts';
-import { createProject } from '../AppAPI';
+import { createIssue } from '../AppAPI';
 
 function ProjectCreatePage() {
   const auth = useContext(AuthContext);
+  const { projectId } = useParams();
   const navigate = useNavigate();
   const [submitted, setSubmitted] = useState(false);
   const [title, setTitle] = useState('');
@@ -26,21 +27,24 @@ function ProjectCreatePage() {
     if (anyErrors) {
       return Promise.reject({ message: 'Please fix errors above.' });
     } else {
-      return createProject(auth, { title, description, priority }).then((res) =>
-        navigate(`/project/${res.data.id}`)
+      return createIssue(auth, projectId, { title, description, priority }).then((res) =>
+        navigate(`/project/${projectId}/issue/${res.data.id}`)
       );
     }
   }
 
   return (
-    <main id="ProjectCreatePage" className="container p-3">
-      <h1 id="ProjectCreateHeader" className="text-center">
-        Create Project
+    <main id="IssueCreatePage" className="container p-3">
+      <h1 id="IssueCreateHeader" className="text-center">
+        Create Issue
       </h1>
       <div>
         <Breadcrumbs
-          stack={[{ title: 'Projects', url: '/project/list' }]}
-          current="Create Project"
+          stack={[
+            { title: 'Projects', url: '/project/list' },
+            { title: 'Project', url: `/project/${projectId}` },
+          ]}
+          current="Create Issue"
         />
       </div>
       {!auth && <Unauthenticated />}

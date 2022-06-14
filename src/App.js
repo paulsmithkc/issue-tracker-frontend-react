@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Routes, Route, Navigate, useNavigate } from 'react-router-dom';
 import _ from 'lodash';
 import 'bootstrap';
@@ -17,6 +17,7 @@ import ProjectListPage from './pages/ProjectListPage';
 import ProjectDetailPage from './pages/ProjectDetailPage';
 import ProjectCreatePage from './pages/ProjectCreatePage';
 import IssueDetailPage from './pages/IssueDetailPage';
+import IssueCreatePage from './pages/IssueCreatePage';
 
 function App() {
   const [auth, setAuth] = useAuthStore(null);
@@ -50,6 +51,7 @@ function App() {
             <Route path="/project/list" element={<ProjectListPage />} />
             <Route path="/project/new" element={<ProjectCreatePage />} />
             <Route path="/project/:projectId" element={<ProjectDetailPage />} />
+            <Route path="/project/:projectId/issue/new" element={<IssueCreatePage />} />
             <Route
               path="/project/:projectId/issue/:issueId"
               element={<IssueDetailPage />}
