@@ -53,19 +53,21 @@ function ProjectListPage() {
         )}
         {error && <div className="text-center text-danger">{error}</div>}
         {data && (
-          <div id="ProjectListContent">
+          <div id="ProjectListContent" className="row">
             {data.map((project) => (
-              <div className="card mb-2" key={project.id}>
-                <div className="card-body">
-                  <div className="card-title h4">
-                    <Link to={`/project/${project.id}`}>{project.title}</Link>
-                    {project.priority && (
-                      <span className="badge bg-primary mx-2">
-                        {project.priority}
-                      </span>
-                    )}
+              <div className="col-lg-6">
+                <div className="card mb-2" key={project.id}>
+                  <div className="card-body">
+                    <div className="card-title h4">
+                      <Link to={`/project/${project.id}`}>{project.title}</Link>
+                      {project.priority && (
+                        <span className="badge bg-primary mx-2">
+                          {project.priority}
+                        </span>
+                      )}
+                    </div>
+                    <div className="card-text">{project.description}</div>
                   </div>
-                  <div className="card-text">{project.description}</div>
                 </div>
               </div>
             ))}

@@ -101,24 +101,31 @@ function ProjectDetailPage() {
         {issueState.error && (
           <div className="text-center text-danger">{issueState.error}</div>
         )}
-        {issueState.data &&
-          issueState.data.map((issue) => (
-            <div className="card mb-1 mx-2" key={issue.id}>
-              <div className="card-body">
-                <div className="card-title h4">
-                  <Link to={`/project/${issue.projectId}/issue/${issue.id}`}>
-                    {issue.title}
-                  </Link>
-                  {issue.priority && (
-                    <span className="badge bg-primary mx-2">
-                      {issue.priority}
-                    </span>
-                  )}
+        {issueState.data && (
+          <div className="row mx-1">
+            {issueState.data.map((issue) => (
+              <div className="col-lg-6">
+                <div className="card mb-1" key={issue.id}>
+                  <div className="card-body">
+                    <div className="card-title h4">
+                      <Link
+                        to={`/project/${issue.projectId}/issue/${issue.id}`}
+                      >
+                        {issue.title}
+                      </Link>
+                      {issue.priority && (
+                        <span className="badge bg-primary mx-2">
+                          {issue.priority}
+                        </span>
+                      )}
+                    </div>
+                    <div className="card-text">{issue.description}</div>
+                  </div>
                 </div>
-                <div className="card-text">{issue.description}</div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
+        )}
       </div>
     </main>
   );
