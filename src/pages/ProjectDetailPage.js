@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
+import moment from 'moment';
 import { useParams, Link } from 'react-router-dom';
 import { AuthContext } from '../AppContexts';
 import { Breadcrumbs } from '../components/Breadcrumbs';
@@ -81,6 +82,22 @@ function ProjectDetailPage() {
                     </span>
                   )}
                 </h2>
+                {projectState.data.createdOn && (
+                  <div className="mb-1 fst-italic text-muted">
+                    {'Created by ' +
+                      projectState.data?.createdBy.email +
+                      ' on ' +
+                      moment(projectState.data.createdOn).format('LL')}
+                  </div>
+                )}
+                {projectState.data.lastUpdatedOn && (
+                  <div className="mb-1 fst-italic text-muted">
+                    {'Last updated by ' +
+                      projectState.data?.lastUpdatedBy.email +
+                      ' on ' +
+                      moment(projectState.data.lastUpdatedOn).format('LL')}
+                  </div>
+                )}
                 <div>{projectState.data.description}</div>
               </div>
             )}
@@ -104,8 +121,8 @@ function ProjectDetailPage() {
         {issueState.data && (
           <div className="row mx-1">
             {issueState.data.map((issue) => (
-              <div className="col-lg-6">
-                <div className="card mb-1" key={issue.id}>
+              <div className="col-lg-6" key={issue.id}>
+                <div className="card mb-1">
                   <div className="card-body">
                     <div className="card-title h4">
                       <Link
@@ -119,6 +136,22 @@ function ProjectDetailPage() {
                         </span>
                       )}
                     </div>
+                    {issue.createdOn && (
+                      <div className="mb-1 fst-italic text-muted">
+                        {'Created by ' +
+                          issue.createdBy?.email +
+                          ' on ' +
+                          moment(issue.createdOn).format('LL')}
+                      </div>
+                    )}
+                    {issue.lastUpdatedOn && (
+                      <div className="mb-1 fst-italic text-muted">
+                        {'Last updated by ' +
+                          issue.lastUpdatedBy?.email +
+                          ' on ' +
+                          moment(issue.lastUpdatedOn).format('LL')}
+                      </div>
+                    )}
                     <div className="card-text">{issue.description}</div>
                   </div>
                 </div>

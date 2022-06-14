@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
+import moment from 'moment';
 import { useParams, Link } from 'react-router-dom';
 import { AuthContext } from '../AppContexts';
 import { Breadcrumbs } from '../components/Breadcrumbs';
@@ -79,6 +80,22 @@ function IssueDetailPage() {
                   </span>
                 )}
               </h2>
+              {issueState.data.createdOn && (
+                  <div className="mb-1 fst-italic text-muted">
+                    {'Created by ' +
+                      issueState.data.createdBy?.email +
+                      ' on ' +
+                      moment(issueState.data.createdOn).format('LL')}
+                  </div>
+                )}
+                {issueState.data.lastUpdatedOn && (
+                  <div className="mb-1 fst-italic text-muted">
+                    {'Last updated by ' +
+                      issueState.data.lastUpdatedBy?.email +
+                      ' on ' +
+                      moment(issueState.data.lastUpdatedOn).format('LL')}
+                  </div>
+                )}
               <div>{issueState.data.description}</div>
             </div>
           )}

@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
+import moment from 'moment';
 import { Link } from 'react-router-dom';
 import { Unauthenticated } from '../components/Unauthenticated';
 import { AuthContext } from '../AppContexts';
@@ -55,8 +56,8 @@ function ProjectListPage() {
         {data && (
           <div id="ProjectListContent" className="row">
             {data.map((project) => (
-              <div className="col-lg-6">
-                <div className="card mb-2" key={project.id}>
+              <div className="col-lg-6" key={project.id}>
+                <div className="card mb-2">
                   <div className="card-body">
                     <div className="card-title h4">
                       <Link to={`/project/${project.id}`}>{project.title}</Link>
@@ -66,6 +67,22 @@ function ProjectListPage() {
                         </span>
                       )}
                     </div>
+                    {project.createdOn && (
+                      <div className="mb-1 fst-italic text-muted">
+                        {'Created by ' +
+                          project.createdBy?.email +
+                          ' on ' +
+                          moment(project.createdOn).format('LL')}
+                      </div>
+                    )}
+                    {project.lastUpdatedOn && (
+                      <div className="mb-1 fst-italic text-muted">
+                        {'Last updated by ' +
+                          project.lastUpdatedBy?.email +
+                          ' on ' +
+                          moment(project.lastUpdatedOn).format('LL')}
+                      </div>
+                    )}
                     <div className="card-text">{project.description}</div>
                   </div>
                 </div>

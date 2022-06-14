@@ -90,12 +90,12 @@ function MyProfilePage() {
                 </h2>
                 <div className="row">
                   <div className="col-lg-6 text-center mb-1 fst-italic text-muted">
-                    Registered:{' '}
-                    {moment(profileState.data.registeredOn).format('LL')}
+                    {'Registered: ' +
+                      moment(profileState.data.registeredOn).format('LL')}
                   </div>
                   <div className="col-lg-6 text-center mb-1 fst-italic text-muted">
-                    Last Login:{' '}
-                    {moment(profileState.data.lastLoginOn).fromNow()}
+                    {'Last Login: ' +
+                      moment(profileState.data.lastLoginOn).fromNow()}
                   </div>
                   <div className="col-lg-6">
                     <InputRow
