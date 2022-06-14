@@ -31,7 +31,7 @@ function RegisterPage({ onLogin }) {
     : '';
   const passwordConfirmError =
     !passwordConfirm || passwordConfirm !== password
-      ? 'Passwords do not match'
+      ? 'Passwords do not match.'
       : '';
 
   const anyErrors =
@@ -114,7 +114,7 @@ function RegisterPage({ onLogin }) {
               autoComplete="new-password"
               value={password}
               onChange={(evt) => setPassword(evt.currentTarget.value)}
-              validated={submitted || password}
+              validated={submitted || password || passwordConfirm}
               error={passwordError}
             />
             <InputRow
@@ -125,7 +125,7 @@ function RegisterPage({ onLogin }) {
               autoComplete="new-password"
               value={passwordConfirm}
               onChange={(evt) => setPasswordConfirm(evt.currentTarget.value)}
-              validated={submitted || password}
+              validated={submitted || password || passwordConfirm}
               error={passwordConfirmError}
             />
             <SubmitRow onSubmit={onSubmit}>Register</SubmitRow>

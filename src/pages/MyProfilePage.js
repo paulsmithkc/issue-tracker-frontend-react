@@ -10,11 +10,21 @@ function MyProfilePage() {
   const [profileState, setProfileState] = useState({});
   const [givenName, setGivenName] = useState('');
   const [familyName, setFamilyName] = useState('');
+  const [password, setPassword] = useState('');
+  const [passwordConfirm, setPasswordConfirm] = useState('');
 
   const givenNameError = !givenName ? 'Given name required.' : '';
   const familyNameError = !familyName ? 'Given name required.' : '';
 
-  const anyErrors = givenNameError || familyNameError;
+  const passwordError =
+    password && password.length < 8
+      ? 'Password must be at least 8 characters long.'
+      : '';
+  const passwordConfirmError =
+    passwordConfirm !== password ? 'Passwords do not match.' : '';
+
+  const anyErrors =
+    givenNameError || familyNameError || passwordError || passwordConfirmError;
 
   useEffect(() => {
     if (!auth) {
@@ -40,7 +50,11 @@ function MyProfilePage() {
     if (anyErrors) {
       return Promise.reject({ message: 'Please fix errors above.' });
     } else {
-      return updateMyProfile(auth, { givenName, familyName });
+      return updateMyProfile(auth, {
+        givenName,
+        familyName,
+        password: password || undefined,
+      });
     }
   }
 
@@ -105,6 +119,32 @@ function MyProfilePage() {
                   validated={false}
                   disabled
                 />
+                <hr className="mb-2" />
+                <InputRow
+                  label="Password"
+                  id="MyProfileForm-PasswordInput"
+                  name="password"
+                  type="password"
+                  autoComplete="new-password"
+                  value={password}
+                  onChange={(evt) => setPassword(evt.currentTarget.value)}
+                  validated={password || passwordConfirm}
+                  error={passwordError}
+                />
+                <InputRow
+                  label="Confirm Password"
+                  id="MyProfileForm-PasswordConfirmInput"
+                  name="passwordConfirm"
+                  type="password"
+                  autoComplete="new-password"
+                  value={passwordConfirm}
+                  onChange={(evt) =>
+                    setPasswordConfirm(evt.currentTarget.value)
+                  }
+                  validated={password || passwordConfirm}
+                  error={passwordConfirmError}
+                />
+                <hr className="mb-3" />
                 <SubmitRow onSubmit={onSubmit}>Update</SubmitRow>
               </form>
             )}
