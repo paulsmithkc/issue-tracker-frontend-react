@@ -26,28 +26,34 @@ function LoginPage({ onLogin }) {
             Login
           </h1>
           <form id="LoginForm" onSubmit={(evt) => evt.preventDefault()}>
-            <InputRow
-              label="Email"
-              id="LoginForm-EmailInput"
-              name="email"
-              type="email"
-              autoComplete="email"
-              value={email}
-              onChange={(evt) => setEmail(evt.currentTarget.value)}
-              validated={submitted}
-              error={emailError}
-            />
-            <InputRow
-              label="Password"
-              id="LoginForm-PasswordInput"
-              name="password"
-              type="password"
-              autoComplete="current-password"
-              value={password}
-              onChange={(evt) => setPassword(evt.currentTarget.value)}
-              validated={submitted}
-              error={passwordError}
-            />
+            <div className="row">
+              <div className="col-lg-6">
+                <InputRow
+                  label="Email"
+                  id="LoginForm-EmailInput"
+                  name="email"
+                  type="email"
+                  autoComplete="email"
+                  value={email}
+                  onChange={(evt) => setEmail(evt.currentTarget.value)}
+                  validated={submitted}
+                  error={emailError}
+                />
+              </div>
+              <div className="col-lg-6">
+                <InputRow
+                  label="Password"
+                  id="LoginForm-PasswordInput"
+                  name="password"
+                  type="password"
+                  autoComplete="current-password"
+                  value={password}
+                  onChange={(evt) => setPassword(evt.currentTarget.value)}
+                  validated={submitted}
+                  error={passwordError}
+                />
+              </div>
+            </div>
             <SubmitRow onSubmit={onSubmit}>Login</SubmitRow>
           </form>
         </div>

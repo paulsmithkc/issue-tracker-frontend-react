@@ -87,64 +87,74 @@ function MyProfilePage() {
                 <h2 className="text-center">
                   {givenName} {familyName}
                 </h2>
-                <InputRow
-                  label="Given Name"
-                  id="MyProfileForm-GivenNameInput"
-                  name="givenName"
-                  type="text"
-                  autoComplete="given-name"
-                  value={givenName}
-                  onChange={(evt) => setGivenName(evt.currentTarget.value)}
-                  validated={true}
-                  error={givenNameError}
-                />
-                <InputRow
-                  label="Family Name"
-                  id="MyProfileForm-FamilyNameInput"
-                  name="familyName"
-                  type="text"
-                  autoComplete="family-name"
-                  value={familyName}
-                  onChange={(evt) => setFamilyName(evt.currentTarget.value)}
-                  validated={true}
-                  error={familyNameError}
-                />
-                <InputRow
-                  label="Email"
-                  id="MyProfileForm-EmailInput"
-                  name="email"
-                  type="email"
-                  autoComplete="email"
-                  value={profileState.data.email}
-                  validated={false}
-                  disabled
-                />
-                <hr className="mb-2" />
-                <InputRow
-                  label="Password"
-                  id="MyProfileForm-PasswordInput"
-                  name="password"
-                  type="password"
-                  autoComplete="new-password"
-                  value={password}
-                  onChange={(evt) => setPassword(evt.currentTarget.value)}
-                  validated={password || passwordConfirm}
-                  error={passwordError}
-                />
-                <InputRow
-                  label="Confirm Password"
-                  id="MyProfileForm-PasswordConfirmInput"
-                  name="passwordConfirm"
-                  type="password"
-                  autoComplete="new-password"
-                  value={passwordConfirm}
-                  onChange={(evt) =>
-                    setPasswordConfirm(evt.currentTarget.value)
-                  }
-                  validated={password || passwordConfirm}
-                  error={passwordConfirmError}
-                />
-                <hr className="mb-3" />
+                <div className="row">
+                  <div className="col-lg-6">
+                    <InputRow
+                      label="Given Name"
+                      id="MyProfileForm-GivenNameInput"
+                      name="givenName"
+                      type="text"
+                      autoComplete="given-name"
+                      value={givenName}
+                      onChange={(evt) => setGivenName(evt.currentTarget.value)}
+                      validated={true}
+                      error={givenNameError}
+                    />
+                  </div>
+                  <div className="col-lg-6">
+                    <InputRow
+                      label="Family Name"
+                      id="MyProfileForm-FamilyNameInput"
+                      name="familyName"
+                      type="text"
+                      autoComplete="family-name"
+                      value={familyName}
+                      onChange={(evt) => setFamilyName(evt.currentTarget.value)}
+                      validated={true}
+                      error={familyNameError}
+                    />
+                  </div>
+                  <div className="col-lg-12">
+                    <InputRow
+                      label="Email"
+                      id="MyProfileForm-EmailInput"
+                      name="email"
+                      type="email"
+                      autoComplete="email"
+                      value={profileState.data.email}
+                      validated={false}
+                      disabled
+                    />
+                  </div>
+                  <div className="col-lg-6">
+                    <InputRow
+                      label="Change Password"
+                      id="MyProfileForm-PasswordChangeInput"
+                      name="password"
+                      type="password"
+                      autoComplete="new-password"
+                      value={password}
+                      onChange={(evt) => setPassword(evt.currentTarget.value)}
+                      validated={password || passwordConfirm}
+                      error={passwordError}
+                    />
+                  </div>
+                  <div className="col-lg-6">
+                    <InputRow
+                      label="Confirm Change Password"
+                      id="MyProfileForm-PasswordChangeConfirmInput"
+                      name="passwordConfirm"
+                      type="password"
+                      autoComplete="new-password"
+                      value={passwordConfirm}
+                      onChange={(evt) =>
+                        setPasswordConfirm(evt.currentTarget.value)
+                      }
+                      validated={password || passwordConfirm}
+                      error={passwordConfirmError}
+                    />
+                  </div>
+                </div>
                 <SubmitRow onSubmit={onSubmit}>Update</SubmitRow>
               </form>
             )}

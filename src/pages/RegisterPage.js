@@ -44,7 +44,7 @@ function RegisterPage({ onLogin }) {
 
   function onSubmit() {
     setSubmitted(true);
-    
+
     if (anyErrors) {
       return Promise.reject({ message: 'Please fix errors above.' });
     } else {
@@ -62,72 +62,88 @@ function RegisterPage({ onLogin }) {
             Register Account
           </h1>
           <form id="RegisterForm" onSubmit={(evt) => evt.preventDefault()}>
-            <InputRow
-              label="Given Name"
-              id="RegisterForm-GivenNameInput"
-              name="givenName"
-              type="text"
-              autoComplete="given-name"
-              value={givenName}
-              onChange={(evt) => setGivenName(evt.currentTarget.value)}
-              validated={submitted || givenName}
-              error={givenNameError}
-            />
-            <InputRow
-              label="Family Name"
-              id="RegisterForm-FamilyNameInput"
-              name="familyName"
-              type="text"
-              autoComplete="family-name"
-              value={familyName}
-              onChange={(evt) => setFamilyName(evt.currentTarget.value)}
-              validated={submitted || familyName}
-              error={familyNameError}
-            />
-            <InputRow
-              label="Email"
-              id="RegisterForm-EmailInput"
-              name="email"
-              type="email"
-              autoComplete="email"
-              value={email}
-              onChange={(evt) => setEmail(evt.currentTarget.value)}
-              validated={submitted || email}
-              error={emailError}
-            />
-            <InputRow
-              label="Confirm Email"
-              id="RegisterForm-EmailConfirmInput"
-              name="emailConfirm"
-              type="email"
-              autoComplete="email"
-              value={emailConfirm}
-              onChange={(evt) => setEmailConfirm(evt.currentTarget.value)}
-              validated={submitted || email}
-              error={emailConfirmError}
-            />
-            <InputRow
-              label="Password"
-              id="RegisterForm-PasswordInput"
-              name="password"
-              type="password"
-              autoComplete="new-password"
-              value={password}
-              onChange={(evt) => setPassword(evt.currentTarget.value)}
-              validated={submitted || password || passwordConfirm}
-              error={passwordError}
-            />
-            <InputRow
-              label="Confirm Password"
-              id="RegisterForm-PasswordConfirmInput"
-              name="passwordConfirm"
-              type="password"
-              autoComplete="new-password"
-              value={passwordConfirm}
-              onChange={(evt) => setPasswordConfirm(evt.currentTarget.value)}
-              validated={submitted || password || passwordConfirm}
-              error={passwordConfirmError}
-            />
+            <div className="row">
+              <div className="col-lg-6">
+                <InputRow
+                  label="Given Name"
+                  id="RegisterForm-GivenNameInput"
+                  name="givenName"
+                  type="text"
+                  autoComplete="given-name"
+                  value={givenName}
+                  onChange={(evt) => setGivenName(evt.currentTarget.value)}
+                  validated={submitted || givenName}
+                  error={givenNameError}
+                />
+              </div>
+              <div className="col-lg-6">
+                <InputRow
+                  label="Family Name"
+                  id="RegisterForm-FamilyNameInput"
+                  name="familyName"
+                  type="text"
+                  autoComplete="family-name"
+                  value={familyName}
+                  onChange={(evt) => setFamilyName(evt.currentTarget.value)}
+                  validated={submitted || familyName}
+                  error={familyNameError}
+                />
+              </div>
+              <div className="col-lg-6">
+                <InputRow
+                  label="Email"
+                  id="RegisterForm-EmailInput"
+                  name="email"
+                  type="email"
+                  autoComplete="email"
+                  value={email}
+                  onChange={(evt) => setEmail(evt.currentTarget.value)}
+                  validated={submitted || email}
+                  error={emailError}
+                />
+              </div>
+              <div className="col-lg-6">
+                <InputRow
+                  label="Confirm Email"
+                  id="RegisterForm-EmailConfirmInput"
+                  name="emailConfirm"
+                  type="email"
+                  autoComplete="email"
+                  value={emailConfirm}
+                  onChange={(evt) => setEmailConfirm(evt.currentTarget.value)}
+                  validated={submitted || email}
+                  error={emailConfirmError}
+                />
+              </div>
+              <div className="col-lg-6">
+                <InputRow
+                  label="Password"
+                  id="RegisterForm-PasswordInput"
+                  name="password"
+                  type="password"
+                  autoComplete="new-password"
+                  value={password}
+                  onChange={(evt) => setPassword(evt.currentTarget.value)}
+                  validated={submitted || password || passwordConfirm}
+                  error={passwordError}
+                />
+              </div>
+              <div className="col-lg-6">
+                <InputRow
+                  label="Confirm Password"
+                  id="RegisterForm-PasswordConfirmInput"
+                  name="passwordConfirm"
+                  type="password"
+                  autoComplete="new-password"
+                  value={passwordConfirm}
+                  onChange={(evt) =>
+                    setPasswordConfirm(evt.currentTarget.value)
+                  }
+                  validated={submitted || password || passwordConfirm}
+                  error={passwordConfirmError}
+                />
+              </div>
+            </div>
             <SubmitRow onSubmit={onSubmit}>Register</SubmitRow>
           </form>
         </div>
