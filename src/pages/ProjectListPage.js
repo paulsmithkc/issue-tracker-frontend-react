@@ -59,6 +59,11 @@ function ProjectListPage() {
                 <div className="card-body">
                   <div className="card-title h4">
                     <Link to={`/project/${project.id}`}>{project.title}</Link>
+                    {project.priority && (
+                      <span className="badge bg-primary mx-2">
+                        {project.priority}
+                      </span>
+                    )}
                   </div>
                   <div className="card-text">{project.description}</div>
                 </div>

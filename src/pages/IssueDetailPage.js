@@ -43,7 +43,7 @@ function IssueDetailPage() {
   return (
     <main id="IssueDetailsPage" className="container p-3">
       <h1 id="IssueDetailsHeader" className="text-center">
-      Issue Details
+        Issue Details
       </h1>
       <div>
         <Breadcrumbs
@@ -71,7 +71,14 @@ function IssueDetailPage() {
           )}
           {issueState.data && (
             <div id="IssueDetailsContent">
-              <h2>{issueState.data.title}</h2>
+              <h2>
+                <span>{issueState.data.title}</span>
+                {issueState.data.priority && (
+                  <span className="badge bg-primary mx-2">
+                    {issueState.data.priority}
+                  </span>
+                )}
+              </h2>
               <div>{issueState.data.description}</div>
             </div>
           )}
@@ -95,9 +102,7 @@ function IssueDetailPage() {
           commentState.data.map((comment) => (
             <div className="card mb-1 mx-2" key={comment.id}>
               <div className="card-body">
-                <div className="card-title h4">
-                  {comment.author}
-                </div>
+                <div className="card-title h4">{comment.author}</div>
                 <div className="card-text">{comment.text}</div>
               </div>
             </div>

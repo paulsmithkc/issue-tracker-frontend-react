@@ -73,7 +73,14 @@ function ProjectDetailPage() {
             )}
             {projectState.data && (
               <div id="ProjectDetailsContent">
-                <h2>{projectState.data.title}</h2>
+                <h2>
+                  <span>{projectState.data.title}</span>
+                  {projectState.data.priority && (
+                    <span className="badge bg-primary mx-2">
+                      {projectState.data.priority}
+                    </span>
+                  )}
+                </h2>
                 <div>{projectState.data.description}</div>
               </div>
             )}
@@ -102,6 +109,11 @@ function ProjectDetailPage() {
                   <Link to={`/project/${issue.projectId}/issue/${issue.id}`}>
                     {issue.title}
                   </Link>
+                  {issue.priority && (
+                    <span className="badge bg-primary mx-2">
+                      {issue.priority}
+                    </span>
+                  )}
                 </div>
                 <div className="card-text">{issue.description}</div>
               </div>
