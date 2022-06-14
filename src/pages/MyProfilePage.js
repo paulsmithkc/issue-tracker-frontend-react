@@ -10,18 +10,11 @@ function MyProfilePage() {
   const [profileState, setProfileState] = useState({});
   const [givenName, setGivenName] = useState('');
   const [familyName, setFamilyName] = useState('');
-  const [email, setEmail] = useState('');
 
   const givenNameError = !givenName ? 'Given name required.' : '';
   const familyNameError = !familyName ? 'Given name required.' : '';
 
-  const emailError = !email
-    ? 'Email required.'
-    : !email.includes('@')
-    ? 'Email missing @ sign.'
-    : '';
-
-  const anyErrors = givenNameError || familyNameError || emailError;
+  const anyErrors = givenNameError || familyNameError;
 
   useEffect(() => {
     if (!auth) {
@@ -34,7 +27,6 @@ function MyProfilePage() {
           setProfileState({ data: res.data });
           setGivenName(res.data.givenName);
           setFamilyName(res.data.familyName);
-          setEmail(res.data.email);
         })
         .catch((err) => {
           const errorMessage = err?.response?.data?.message || err.message;
@@ -48,7 +40,7 @@ function MyProfilePage() {
     if (anyErrors) {
       return Promise.reject({ message: 'Please fix errors above.' });
     } else {
-      return updateMyProfile(auth, { givenName, familyName, email });
+      return updateMyProfile(auth, { givenName, familyName });
     }
   }
 
@@ -109,10 +101,9 @@ function MyProfilePage() {
                   name="email"
                   type="email"
                   autoComplete="email"
-                  value={email}
-                  onChange={(evt) => setEmail(evt.currentTarget.value)}
-                  validated={true}
-                  error={emailError}
+                  value={profileState.data.email}
+                  validated={false}
+                  disabled
                 />
                 <SubmitRow onSubmit={onSubmit}>Update</SubmitRow>
               </form>
