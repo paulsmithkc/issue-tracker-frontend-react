@@ -87,3 +87,11 @@ export function getIssueComments(auth, projectId, issueId) {
     }
   );
 }
+
+export function createIssueComment(auth, projectId, issueId, data) {
+  return axios.put(`${apiUrl}/api/project/${projectId}/issue/${issueId}/comment/new`, data, {
+    headers: {
+      Authorization: `Bearer ${auth.token}`,
+    },
+  });
+}

@@ -3,6 +3,7 @@ import moment from 'moment';
 import { useParams } from 'react-router-dom';
 import { AuthContext } from '../AppContexts';
 import { Breadcrumbs } from '../components/Breadcrumbs';
+import { IssueCommentForm } from '../components/IssueCommentForm';
 import { getIssueById, getIssueComments } from '../AppAPI';
 
 function IssueDetailPage() {
@@ -40,6 +41,13 @@ function IssueDetailPage() {
         });
     }
   }, [auth, projectId, issueId]);
+
+  function onPostComment(newComment) {
+    const commentData = commentState.data
+      ? [...commentState.data, newComment]
+      : [newComment];
+    setCommentState({ data: commentData });
+  }
 
   return (
     <main id="IssueDetailsPage" className="container p-3">
@@ -81,21 +89,21 @@ function IssueDetailPage() {
                 )}
               </h2>
               {issueState.data.createdOn && (
-                  <div className="mb-1 fst-italic text-muted">
-                    {'Created by ' +
-                      issueState.data.createdBy?.email +
-                      ' on ' +
-                      moment(issueState.data.createdOn).format('LL')}
-                  </div>
-                )}
-                {issueState.data.lastUpdatedOn && (
-                  <div className="mb-1 fst-italic text-muted">
-                    {'Last updated by ' +
-                      issueState.data.lastUpdatedBy?.email +
-                      ' on ' +
-                      moment(issueState.data.lastUpdatedOn).format('LL')}
-                  </div>
-                )}
+                <div className="mb-1 fst-italic text-muted">
+                  {'Created by ' +
+                    issueState.data.createdBy?.email +
+                    ' on ' +
+                    moment(issueState.data.createdOn).format('LL')}
+                </div>
+              )}
+              {issueState.data.lastUpdatedOn && (
+                <div className="mb-1 fst-italic text-muted">
+                  {'Last updated by ' +
+                    issueState.data.lastUpdatedBy?.email +
+                    ' on ' +
+                    moment(issueState.data.lastUpdatedOn).format('LL')}
+                </div>
+              )}
               <div>{issueState.data.description}</div>
             </div>
           )}
@@ -115,15 +123,24 @@ function IssueDetailPage() {
         {commentState.error && (
           <div className="text-center text-danger">{commentState.error}</div>
         )}
-        {commentState.data &&
-          commentState.data.map((comment) => (
-            <div className="card mb-1 mx-2" key={comment.id}>
-              <div className="card-body">
-                <div className="card-title h4">{comment.author}</div>
-                <div className="card-text">{comment.text}</div>
+        {commentState.data && (
+          <div className="mx-2">
+            {commentState.data.map((comment) => (
+              <div className="card mb-1" key={comment.id}>
+                <div className="card-body">
+                  <div className="mb-1 fst-italic text-muted">
+                    {'Posted by ' +
+                      comment.createdBy.email +
+                      ', ' +
+                      moment(comment.createdOn).fromNow()}
+                  </div>
+                  <div className="card-text">{comment.text}</div>
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+            <IssueCommentForm onPostComment={onPostComment} />
+          </div>
+        )}
       </div>
     </main>
   );
